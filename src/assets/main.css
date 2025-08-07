@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+@import 'primeicons/primeicons.css';
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+    /* background-color: #F8FAFC; */
+    /* background-color: #F7F9F2; */
+    background-color: #F2F0EF;
+    /* background-color: white; */
+}
+
+.dark body {
+    background-color: #292929;
+}
+
+/* Hide scrollbar but keep scroll functionality (Chrome, Safari, Edge) */
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+.scrollbar-hidden {
+    scrollbar-width: none;
+}
+
+.p-card{
+    border-radius: 0% !important;
+    border: 1px solid transparent;
+}
+
+.p-card:hover{
+    border: 1px solid #2563EB;
+    box-shadow: 0 4px 8px 0 #BFDBFE, 0 6px 20px 0 #BFDBFE;
+}
+
+.dark .p-card:hover{
+    background-color: #292929;
+    border: 1px solid #2563EB;
+    box-shadow: 0 0px 0px 0 #BFDBFE, 0 0px 0px 0 #BFDBFE;
+}
