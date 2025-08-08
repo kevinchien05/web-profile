@@ -11,7 +11,7 @@
     
             <!-- Avatar + Name -->
             <div class="relative mt-8">
-                <img src="https://i.pravatar.cc/100" class="w-24 h-24 rounded-full border-4 border-blue-500" />
+                <img src="../assets/image/S__69730311.jpg" class="w-24 h-24 rounded-full border-4 border-blue-500" />
             </div>
     
             <!-- Name & Title -->
@@ -22,14 +22,14 @@
     
             <!-- Social Icons -->
             <div class="flex gap-4 mt-4">
-                <button class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-500">
-                    <i class="pi pi-facebook"></i>
+                <button class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-500">
+                    <i class="pi pi-github"></i>
                 </button>
                 <button class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500">
                     <i class="pi pi-instagram"></i>
                 </button>
-                <button class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-red-500">
-                    <i class="pi pi-times"></i>
+                <button class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-500">
+                    <i class="pi pi-whatsapp"></i>
                 </button>
                 <button class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-600">
                     <i class="pi pi-linkedin"></i>
@@ -40,10 +40,10 @@
     
             <!-- Menu Items -->
             <nav class="w-full px-6 space-y-3">
-                <SidebarItem icon="pi-user" text="About Me" active />
-                <SidebarItem icon="pi-briefcase" text="Portfolio"/>
-                <SidebarItem icon="pi-file" text="Resume" />
-                <SidebarItem icon="pi-envelope" text="Contact" />
+                <SidebarItem icon="pi pi-user" text="About Me" active />
+                <SidebarItem icon="pi pi-briefcase" text="Portfolio"/>
+                <SidebarItem icon="fa-regular fa-id-badge" text="Resume" />
+                <SidebarItem icon="pi pi-envelope" text="Contact" />
             </nav>
         </div>
         <div class="basis-1/64 h-screen bg-gradient-to-b from-blue-400 via-purple-50 dark:from-blue-500 to-blue-300"></div>

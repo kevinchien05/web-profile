@@ -36,8 +36,8 @@
                     <div class="mt-4 flex flex-wrap gap-4">
                         <Button label="View Portofolio" icon="pi pi-arrow-right" severity="primary" rounded size="large"
                             class="w-48 justify-center" />
-                        <Button label="View Resume" icon="pi pi-file" severity="primary" rounded variant="outlined"
-                            size="large" class="w-48 justify-center" />
+                        <Button label="View Resume" icon="fa-regular fa-id-badge" severity="primary" rounded
+                            variant="outlined" size="large" class="w-48 justify-center" />
                     </div>
                 </div>
 
@@ -45,20 +45,22 @@
                 <div class="relative md:basis-1/3 m-5">
                     <div class="absolute inset-0 bg-blue-400 dark:bg-indigo-300 rounded-lg animate-rotate-slow z-0">
                     </div>
-                    <img src="https://i.pravatar.cc/100" class="relative w-full h-full z-10 object-cover rounded-lg" />
+                    <img src="../assets/image/S__69730311.jpg"
+                        class="relative w-full h-full z-10 object-cover rounded-lg" />
                 </div>
             </div>
             <div class="pt-5 flex flex-col gap-3 w-full">
                 <div class="flex items-center">
                     <div class="text-blue-600 text-6xl">|</div>
-                    <div class="font-bold text-6xl pt-3">What i do</div>
+                    <div class="font-bold text-4xl md:text-6xl pt-3">What i do</div>
                 </div>
                 <div class="flex flex-row px-1">
                     <div class="w-full">
                         <p class="text-lg text-left">Below is a quick overview of my main technical skill sets and
                             technologies I use. Want to find
-                            out more about my experience? Check out my <span class="text-blue-500">online resume</span>
-                            and <span class="text-blue-500">project portfolio</span> .</p>
+                            out more about my experience? Check out my <span class="text-blue-500 font-semibold">online
+                                resume</span>
+                            and <span class="text-blue-500 font-semibold">project portfolio</span> .</p>
                     </div>
                     <div class="hidden md:block md:w-80"></div>
                 </div>
@@ -68,18 +70,65 @@
                             <template #title>
                                 <div class="flex flex-row gap-2">
                                     <div v-for="ic in i.icon">
-                                        <i :class="ic.name" :style="{ color: ic.color }" class="text-3xl"></i>
+                                        <img v-if="ic.link" :src="ic.link" class="w-8 h-8">
                                     </div>
                                 </div>
                             </template>
                             <template #subtitle>{{ i.name }}</template>
                             <template #content>
-                                {{ i.content }}
+                                <div>
+                                    <p class="mb-2">Expertise</p>
+                                    <ProgressBar :value="i.percent" />
+                                </div>
                             </template>
                         </Card>
                     </div>
                 </div>
             </div>
+            <div class="h-10"></div>
+            <div class="pt-5 flex flex-col gap-3 w-full">
+                <div class="flex items-center">
+                    <div class="text-blue-600 text-6xl">|</div>
+                    <div class="font-bold text-4xl md:text-6xl pt-3">Featured Project</div>
+                </div>
+                <div class="flex flex-col md:flex-row px-1">
+                    <div class="w-full">
+                        <p class="text-lg text-left">Explore a highlight of one of my key technical achievements. This
+                            featured
+                            project showcases the tools, technologies, and problem-solving skills I bring to every
+                            build.
+                        </p>
+                    </div>
+                    <div class="block md:w-80">
+                        <Button label="View Portofolio" icon="pi pi-arrow-right" severity="primary" size="large"
+                            rounded />
+                    </div>
+                </div>
+                <div class="h-5"></div>
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-4 px-1">
+                    <div class="project-card flex flex-col justify-items-center gap-5" v-for="i in projects">
+                        <img :src="i.image" alt=""
+                            class="w-full h-100 object-fill transition-transform duration-500 ease-in-out hover:scale-[1.05]">
+                        <div class="flex flex-row gap-5 mx-2 items-center">
+                            <div class="basis-5/6 flex flex-col gap-3">
+                                <div class="flex flex-row gap-2">
+                                    <Button v-for="stack in i.stacks" :label="stack" variant="outlined"
+                                        severity="contrast" rounded size="small" />
+                                </div>
+                                <div>
+                                    <p class="font-bold text-2xl">{{ i.name }}</p>
+                                </div>
+                            </div>
+                            <div class="basis-1/6 justify-end">
+                                <Button icon="pi pi-arrow-up-right" rounded
+                                    class="btn-rotate bg-neutral-300 text-black border-neutral-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white dark:bg-neutral-500 dark:text-white dark:border-neutral-500 dark:hover:bg-blue-300 dark:hover:border-blue-300 dark:hover:text-black" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-20"></div>
+            <Footer class="mt-5" />
         </div>
     </div>
 </template>
@@ -90,6 +139,8 @@ import Button from 'primevue/button';
 import { ref, onMounted } from 'vue';
 import { useDark } from '@vueuse/core';
 import Card from 'primevue/card';
+import { ProgressBar } from 'primevue';
+import Footer from '@/components/Footer.vue';
 
 const fullText = 'WEB DEVELOPER'
 const displayText = ref('')
@@ -99,45 +150,68 @@ const isDark = useDark();
 const skills = ref([
     {
         "name": "Vue",
-        "icon": [{ name: "fa-brands fa-vuejs", color: "#1C9C71" }],
-        "content": "",
+        "icon": [{ link: "/src/assets/logo/icons8-vue-js.svg" }],
+        "percent": 50,
     },
     {
         "name": "Laravel",
-        "icon": [{ name: "fa-brands fa-laravel", color: "#FE1650" }],
-        "content": "",
+        "icon": [{ link: "/src/assets/logo/icons8-laravel-64.png" }],
+        "percent": 40,
     },
     {
         "name": "Node.Js",
-        "icon": [{ name: "fa-brands fa-node", color: "#1ECC53" }],
-        "content": "",
+        "icon": [{ link: "/src/assets/logo/icons8-nodejs.svg" }],
+        "percent": 60
     },
     {
-        "name": "MySQL",
-        "icon": [{ name: "fa-brands fa-node", color: "#1ECC53" }],
-        "content": "",
+        "name": "MySQL & PostgreSQL",
+        "icon": [{ link: "/src/assets/logo/icons8-mysql-logo.svg" }, { link: "/src/assets/logo/icons8-postgresql.svg" }],
+        "percent": 60,
     },
     {
-        "name": "PostgreSQL",
-        "icon": [{ name: "fa-brands fa-node", color: "#1ECC53" }],
-        "content": "",
+        "name": "Spring Boot",
+        "icon": [{ link: "/src/assets/logo/icons8-spring-boot.svg" }],
+        "percent": 50,
     },
     {
         "name": "Bootstrap",
-        "icon": [{ name: "fa-brands fa-node", color: "#1ECC53" }],
-        "content": "",
+        "icon": [{ link: "/src/assets/logo/icons8-bootstrap.svg" }],
+        "percent": 65,
     },
     {
         "name": "Tailwind",
-        "icon": [{ name: "fa-brands fa-node", color: "#1ECC53" }],
-        "content": "",
+        "icon": [{ link: "/src/assets/logo/icons8-tailwind-css.svg" }],
+        "percent": 70,
     },
     {
         "name": "HTML & CSS",
-        "icon": [{ name: "fa-brands fa-node", color: "#1ECC53" }],
-        "content": "",
+        "icon": [{ link: "/src/assets/logo/icons8-html-5.svg" }, { link: "/src/assets/logo/icons8-css-logo.svg" }],
+        "percent": 70,
     },
-])
+]);
+
+const projects = [
+    {
+        "image": "/src/assets/image/jaegar.png",
+        "name": "CasHiLo Web App for Money Management",
+        "stacks": ["Vue", "Spring", "PostgreSQL"],
+    },
+    {
+        "image": "/src/assets/image/jaegar.png",
+        "name": "Jaegar Resto for Restaurant Management",
+        "stacks": ["Laravel", "Bootstrap 5", "PostgreSQL"],
+    },
+    {
+        "image": "/src/assets/image/jaegar.png",
+        "name": "POS App",
+        "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
+    },
+    {
+        "image": "/src/assets/image/jaegar.png",
+        "name": "UniPhone Marketplace",
+        "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
+    },
+];
 
 const toggleDark = () => {
     document.documentElement.classList.toggle('dark');
@@ -169,32 +243,3 @@ function typeWriter() {
     }, isDeleting ? 100 : 150)
 }
 </script>
-<style>
-@layer utilities {
-    @keyframes rotate-slow {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        25% {
-            transform: rotate(10deg);
-        }
-
-        50% {
-            transform: rotate(0deg);
-        }
-
-        50% {
-            transform: rotate(-10deg);
-        }
-
-        100% {
-            transform: rotate(0deg);
-        }
-    }
-
-    .animate-rotate-slow {
-        animation: rotate-slow 10s linear infinite;
-    }
-}
-</style>

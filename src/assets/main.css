@@ -24,18 +24,51 @@ body {
     scrollbar-width: none;
 }
 
-.p-card{
+.p-card {
     border-radius: 0% !important;
     border: 1px solid transparent;
 }
 
-.p-card:hover{
+.p-card:hover {
     border: 1px solid #2563EB;
     box-shadow: 0 4px 8px 0 #BFDBFE, 0 6px 20px 0 #BFDBFE;
 }
 
-.dark .p-card:hover{
+.dark .p-card:hover {
     background-color: #292929;
     border: 1px solid #2563EB;
     box-shadow: 0 0px 0px 0 #BFDBFE, 0 0px 0px 0 #BFDBFE;
+}
+
+.btn-rotate:hover .p-button-icon {
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+}
+
+@layer utilities {
+    @keyframes rotate-slow {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(10deg);
+        }
+
+        50% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(-10deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    .animate-rotate-slow {
+        animation: rotate-slow 10s linear infinite;
+    }
 }
