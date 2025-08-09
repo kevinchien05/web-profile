@@ -78,7 +78,10 @@
                             <template #content>
                                 <div>
                                     <p class="mb-2">Expertise</p>
-                                    <ProgressBar :value="i.percent" />
+                                    <div class="flex flex-row gap-1">
+                                        <i v-for="n in 5" :key="n" :class="getStarClass(i.star, n)"></i>
+                                    </div>
+                                    <p class="mt-1">{{ i.level }}</p>
                                 </div>
                             </template>
                         </Card>
@@ -106,24 +109,35 @@
                 </div>
                 <div class="h-5"></div>
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-4 px-1">
-                    <div class="project-card flex flex-col justify-items-center gap-5" v-for="i in projects">
+                    <div class="project-card flex flex-col justify-items-center gap-5 relative"
+                        v-for="(i, index) in projects" :key="index">
                         <img :src="i.image" alt=""
-                            class="w-full h-100 object-fill transition-transform duration-500 ease-in-out hover:scale-[1.05]">
-                        <div class="flex flex-row gap-5 mx-2 items-center">
+                            class="w-full h-100 object-fill transition-transform duration-500 ease-in-out hover:scale-[1.05]" />
+
+                        <div class="flex flex-row gap-5 mx-2 items-center relative">
                             <div class="basis-5/6 flex flex-col gap-3">
                                 <div class="flex flex-row gap-2">
-                                    <Button v-for="stack in i.stacks" :label="stack" variant="outlined"
+                                    <Button v-for="stack in i.stacks" :key="stack" :label="stack" variant="outlined"
                                         severity="contrast" rounded size="small" />
                                 </div>
-                                <div>
-                                    <p class="font-bold text-2xl">{{ i.name }}</p>
-                                </div>
+                                <p class="font-bold text-2xl">{{ i.name }}</p>
                             </div>
-                            <div class="basis-1/6 justify-end">
-                                <Button icon="pi pi-arrow-up-right" rounded
+
+                            <div class="basis-1/6 justify-end relative">
+                                <Button icon="pi pi-arrow-up-right" rounded @click="toggleDescription(index)"
                                     class="btn-rotate bg-neutral-300 text-black border-neutral-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white dark:bg-neutral-500 dark:text-white dark:border-neutral-500 dark:hover:bg-blue-300 dark:hover:border-blue-300 dark:hover:text-black" />
                             </div>
                         </div>
+
+                        <!-- Full-width floating description -->
+                        <Transition name="slide-fade">
+                            <div v-if="activeDescriptionIndex === index"
+                                class="absolute left-0 right-0 top-full mt-2 p-4 rounded-lg shadow-lg bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 z-50">
+                                <p class="text-sm text-gray-700 dark:text-gray-200">
+                                    {{ i.description }}
+                                </p>
+                            </div>
+                        </Transition>
                     </div>
                 </div>
             </div>
@@ -147,46 +161,59 @@ const displayText = ref('')
 let isDeleting = false
 let index = 0
 const isDark = useDark();
+const activeDescriptionIndex = ref(null)
+
+const toggleDescription = (index) => {
+    activeDescriptionIndex.value = activeDescriptionIndex.value === index ? null : index
+}
 const skills = ref([
     {
         "name": "Vue",
         "icon": [{ link: "/src/assets/logo/icons8-vue-js.svg" }],
-        "percent": 50,
+        "star": 3,
+        "level": "Intermediate"
     },
     {
         "name": "Laravel",
         "icon": [{ link: "/src/assets/logo/icons8-laravel-64.png" }],
-        "percent": 40,
+        "star": 2.5,
+        "level": "Novice"
     },
     {
         "name": "Node.Js",
         "icon": [{ link: "/src/assets/logo/icons8-nodejs.svg" }],
-        "percent": 60
+        "star": 3,
+        "level": "Intermediate"
     },
     {
         "name": "MySQL & PostgreSQL",
         "icon": [{ link: "/src/assets/logo/icons8-mysql-logo.svg" }, { link: "/src/assets/logo/icons8-postgresql.svg" }],
-        "percent": 60,
+        "star": 3.5,
+        "level": "Intermediate"
     },
     {
         "name": "Spring Boot",
         "icon": [{ link: "/src/assets/logo/icons8-spring-boot.svg" }],
-        "percent": 50,
+        "star": 3,
+        "level": "Intermediate"
     },
     {
         "name": "Bootstrap",
         "icon": [{ link: "/src/assets/logo/icons8-bootstrap.svg" }],
-        "percent": 65,
+        "star": 3,
+        "level": "Intermediate"
     },
     {
         "name": "Tailwind",
         "icon": [{ link: "/src/assets/logo/icons8-tailwind-css.svg" }],
-        "percent": 70,
+        "star": 3.5,
+        "level": "Intermediate"
     },
     {
         "name": "HTML & CSS",
         "icon": [{ link: "/src/assets/logo/icons8-html-5.svg" }, { link: "/src/assets/logo/icons8-css-logo.svg" }],
-        "percent": 70,
+        "star": 4,
+        "level": "Advanced"
     },
 ]);
 
@@ -195,23 +222,38 @@ const projects = [
         "image": "/src/assets/image/jaegar.png",
         "name": "CasHiLo Web App for Money Management",
         "stacks": ["Vue", "Spring", "PostgreSQL"],
+        "description": "A financial management platform that simplifies money management with features like multi-account support, detailed financial record tracking, and an interactive dashboard for real-time insights. Developed with Spring Boot, Vue, Tailwind, and PostgreSQL to deliver performance, scalability, and a modern user experience."
     },
     {
         "image": "/src/assets/image/jaegar.png",
         "name": "Jaegar Resto for Restaurant Management",
         "stacks": ["Laravel", "Bootstrap 5", "PostgreSQL"],
+        "description": "A comprehensive restaurant management system that streamlines operations with features like table management, menu organization, real-time menu availability control, and an interactive sales dashboard. Developed with Laravel, Bootstrap, and PostgreSQL for performance, scalability, and ease of use."
     },
     {
         "image": "/src/assets/image/jaegar.png",
         "name": "POS App",
         "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
+        "description": "A web-based system that simplifies store operations by providing real-time inventory tracking, seamless transaction management, and automated cash report generation. Developed using Node.js, MySQL, and Bootstrap for efficiency and reliability."
     },
     {
         "image": "/src/assets/image/jaegar.png",
         "name": "UniPhone Marketplace",
         "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
+        "description": "A web-based marketplace platform that offers seamless shopping with features like a cart, wishlist, and secure payment system. Developed using Node.js, MySQL, and Bootstrap to ensure performance, scalability, and user-friendly design."
     },
 ];
+
+const getStarClass = (rating, position) => {
+    if (rating >= position) {
+        return "fa-solid fa-star text-yellow-300 dark:text-yellow-500"
+    } else if (rating >= position - 0.5) {
+        return "fa-solid fa-star-half-stroke text-yellow-300 dark:text-yellow-500"
+    } else {
+        return "fa-regular fa-star"
+    }
+}
+
 
 const toggleDark = () => {
     document.documentElement.classList.toggle('dark');
@@ -243,3 +285,25 @@ function typeWriter() {
     }, isDeleting ? 100 : 150)
 }
 </script>
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+    max-height: 200px;
+    /* adjust as needed */
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
