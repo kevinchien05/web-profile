@@ -5,7 +5,6 @@ import PrimeVue from 'primevue/config';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import App from './App.vue'
-import router from './routes';
 
 const MyPreset = definePreset(Aura, {
     semantic: {
@@ -38,7 +37,6 @@ app.use(PrimeVue, {
         },
     }
 });
-app.use(router);
 
 app.mount('#app');
 

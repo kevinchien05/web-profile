@@ -21,7 +21,7 @@
             <!-- Content Row -->
             <div class="flex flex-col md:flex-row mb-5">
                 <!-- Left Text -->
-                <div class="md:basis-2/3 content-center">
+                <div class="md:basis-2/3 content-center top">
                     <p class="font-bold text-xl">HI, I'M KEVIN</p>
                     <p class="font-bold text-4xl text-blue-400 my-5">
                         <span v-text="displayText"></span><span class="animate-pulse">|</span>
@@ -62,7 +62,7 @@
                                 resume</span>
                             and <span class="text-blue-500 font-semibold">project portfolio</span> .</p>
                     </div>
-                    <div class="hidden md:block md:w-80"></div>
+                    <div class="hidden xl:block xl:w-80"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4 px-1">
                     <div v-for="i in skills">
@@ -94,7 +94,7 @@
                     <div class="text-blue-600 text-6xl">|</div>
                     <div class="font-bold text-4xl md:text-6xl pt-3">Featured Project</div>
                 </div>
-                <div class="flex flex-col md:flex-row px-1">
+                <div class="flex flex-col gap-3 xl:flex-row px-1">
                     <div class="w-full">
                         <p class="text-lg text-left">Explore a highlight of one of my key technical achievements. This
                             featured
@@ -102,7 +102,7 @@
                             build.
                         </p>
                     </div>
-                    <div class="block md:w-80">
+                    <div class="block xl:w-80">
                         <Button label="View Portofolio" icon="pi pi-arrow-right" severity="primary" size="large"
                             rounded />
                     </div>
@@ -141,6 +141,91 @@
                     </div>
                 </div>
             </div>
+            <div class="h-10"></div>
+            <div class="pt-5 flex flex-col gap-3 w-full">
+                <div class="flex items-center">
+                    <div class="text-blue-600 text-6xl">|</div>
+                    <div class="font-bold text-4xl md:text-6xl pt-3">Online Resume</div>
+                </div>
+                <div class="flex flex-col xl:flex-row px-1">
+                    <div class="w-full">
+                        <p class="text-lg text-left">This online resume highlights my skills, experience, and
+                            achievements in a
+                            clear, interactive format—making it easy to get to know my professional background at a
+                            glance.
+                        </p>
+                    </div>
+                    <div class="block xl:w-80"></div>
+                </div>
+                <div class="h-5"></div>
+                <div class="flex justify-center mt-4 px-1">
+                    <Button label="Download Resume" icon="pi pi-download" size="large" @click="showPDF" />
+                </div>
+            </div>
+            <div class="h-10"></div>
+            <div class="pt-5 flex flex-col gap-3 w-full">
+                <div class="flex items-center">
+                    <div class="text-blue-600 text-6xl">|</div>
+                    <div class="font-bold text-4xl md:text-6xl pt-3">Get In Touch</div>
+                </div>
+                <div class="flex flex-col xl:flex-row px-1">
+                    <div class="w-full">
+                        <p class="text-lg text-left">Let’s connect! Whether you have a question, feedback, or just want
+                            to say
+                            hello, I’d be happy to hear from you.
+                        </p>
+                    </div>
+                    <div class="block xl:w-80"></div>
+                </div>
+                <div class="h-5"></div>
+                <div class="flex flex-col-reverse xl:flex-row">
+                    <div class="contact-form basis-1/2 bg-white dark:bg-gray-600">
+                        <div class="mx-5 my-6">
+                            <h1 class="font-bold text-xl">Contact Form</h1>
+                            <form>
+                                <div class="flex flex-col mt-2 gap-2">
+                                    <label for="fullname">Fullname</label>
+                                    <InputText v-model="contact.fullname" id="fullname" placeholder="Fullname"
+                                        type="text" />
+                                </div>
+                                <div class="flex flex-col mt-2 gap-2">
+                                    <label for="email">Email Address</label>
+                                    <InputText v-model="contact.email" id="email" placeholder="Email" type="email" />
+                                </div>
+                                <div class="flex flex-col mt-2 gap-2">
+                                    <label for="subject">Subject</label>
+                                    <InputText v-model="contact.subject" id="subject" placeholder="Subject"
+                                        type="text" />
+                                </div>
+                                <div class="flex flex-col mt-2 gap-2">
+                                    <label for="message">Message</label>
+                                    <Textarea id="message" v-model="contact.message" rows="5" placeholder="Message" />
+                                    <!-- <InputText v-model="contact.message" id="message" placeholder="Message" type=""/> -->
+                                </div>
+                                <div class="flex justify-center mt-5">
+                                    <Button label="Send Message" type="submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="basis-1/2">
+                        <div class="mx-5 my-6">
+                            <h1 class="font-bold text-xl">Contact Details</h1>
+                            <div class="flex flex-col mt-2 gap-2">
+                                <div class="mt-2">
+                                    <p><i class="pi pi-map-marker mr-3"></i>Medan, North Sumatra</p>
+                                </div>
+                                <div class="mt-2">
+                                    <p><i class="pi pi-envelope mr-3"></i>kevinchien24@gmail.com</p>
+                                </div>
+                                <div class="mt-2">
+                                    <p><i class="pi pi-phone mr-3"></i>+6281375250181</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="h-20"></div>
             <Footer class="mt-5" />
         </div>
@@ -153,7 +238,8 @@ import Button from 'primevue/button';
 import { ref, onMounted } from 'vue';
 import { useDark } from '@vueuse/core';
 import Card from 'primevue/card';
-import { ProgressBar } from 'primevue';
+import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
 import Footer from '@/components/Footer.vue';
 
 const fullText = 'WEB DEVELOPER'
@@ -162,10 +248,21 @@ let isDeleting = false
 let index = 0
 const isDark = useDark();
 const activeDescriptionIndex = ref(null)
+const contact = ref({
+    fullname: "",
+    email: "",
+    subject: "",
+    message: ""
+});
 
 const toggleDescription = (index) => {
     activeDescriptionIndex.value = activeDescriptionIndex.value === index ? null : index
 }
+
+const showPDF = () => {
+    window.open('/resume.pdf', '_blank');
+}
+
 const skills = ref([
     {
         "name": "Vue",
@@ -285,25 +382,3 @@ function typeWriter() {
     }, isDeleting ? 100 : 150)
 }
 </script>
-<style scoped>
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-.slide-fade-enter-to,
-.slide-fade-leave-from {
-    max-height: 200px;
-    /* adjust as needed */
-    opacity: 1;
-    transform: translateY(0);
-}
-</style>
