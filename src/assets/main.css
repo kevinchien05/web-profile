@@ -66,11 +66,13 @@ body {
     transform: translateY(0);
 }
 
-.contact-form {
+.contact-form,
+.company-img {
     box-shadow: 0 10px 10px 0 #94A3B8;
 }
 
-.dark .contact-form{
+.dark .contact-form,
+.dark .company-img {
     box-shadow: none;
 }
 
@@ -100,4 +102,50 @@ body {
     .animate-rotate-slow {
         animation: rotate-slow 10s linear infinite;
     }
+}
+
+@theme {
+    @keyframes popIn {
+        0% {
+            transform: scale(0) translateY(50px);
+            opacity: 0;
+        }
+
+        50% {
+            transform: scale(1.05) translateY(0);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    --animate-popIn: popIn 1.5s ease-out forwards;
+}
+
+@theme {
+    @keyframes slideUp {
+        0% {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    --animate-slideUp: slideUp 1s ease-out forwards;
+}
+
+.project-card {
+  position: relative;
+  z-index: 0; /* default */
+}
+
+.project-card.show-description {
+  z-index: 50; /* bring this card above others */
 }

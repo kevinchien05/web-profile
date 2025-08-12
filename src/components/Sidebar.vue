@@ -44,10 +44,14 @@
 
             <!-- Menu Items -->
             <nav class="w-full px-6 space-y-3">
-                <SidebarItem icon="pi pi-user" text="About Me" active/>
-                <SidebarItem icon="pi pi-briefcase" text="Portfolio"/>
-                <SidebarItem icon="fa-regular fa-id-badge" text="Resume" />
-                <SidebarItem icon="pi pi-envelope" text="Contact" />
+                <SidebarItem icon="pi pi-user" text="About Me" :active="activeSection === 'about'"
+                    @click="scrollTo('about')" />
+                <SidebarItem icon="pi pi-briefcase" text="Portfolio" :active="activeSection === 'portfolio'"
+                    @click="scrollTo('portfolio')" />
+                <SidebarItem icon="fa-regular fa-id-badge" text="Career" :active="activeSection === 'resume'"
+                    @click="scrollTo('resume')" />
+                <SidebarItem icon="pi pi-envelope" text="Contact" :active="activeSection === 'contact'"
+                    @click="scrollTo('contact')" />
             </nav>
         </div>
         <div class="basis-1/64 h-screen bg-gradient-to-b from-blue-400 via-purple-50 dark:from-blue-500 to-blue-300">
@@ -62,5 +66,14 @@ const toggleDark = () => {
     document.documentElement.classList.toggle('dark');
     isDark.value = !isDark.value;
 }
+const props = defineProps({
+  activeSection: String
+});
 
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+}
 </script>
