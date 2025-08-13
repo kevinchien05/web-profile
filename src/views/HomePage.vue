@@ -207,29 +207,29 @@
                         <div class="contact-form basis-1/2 bg-white dark:bg-gray-600">
                             <div class="mx-5 my-6">
                                 <h1 class="font-bold text-xl">Contact Form</h1>
-                                <form>
+                                <form @submit.prevent="sendEmail">
                                     <div class="flex flex-col mt-2 gap-2">
                                         <label for="fullname">Fullname</label>
                                         <InputText v-model="contact.fullname" id="fullname" placeholder="Fullname"
-                                            type="text" />
+                                            type="text" :invalid="submitted && !contact.fullname" />
                                     </div>
                                     <div class="flex flex-col mt-2 gap-2">
                                         <label for="email">Email Address</label>
-                                        <InputText v-model="contact.email" id="email" placeholder="Email"
-                                            type="email" />
+                                        <InputText v-model="contact.email" id="email" placeholder="Email" type="email"
+                                            :invalid="submitted && !contact.email" />
                                     </div>
                                     <div class="flex flex-col mt-2 gap-2">
                                         <label for="subject">Subject</label>
                                         <InputText v-model="contact.subject" id="subject" placeholder="Subject"
-                                            type="text" />
+                                            type="text" :invalid="submitted && !contact.subject" />
                                     </div>
                                     <div class="flex flex-col mt-2 gap-2">
                                         <label for="message">Message</label>
-                                        <Textarea id="message" v-model="contact.message" rows="5"
-                                            placeholder="Message" />
-                                        <!-- <InputText v-model="contact.message" id="message" placeholder="Message" type=""/> -->
+                                        <Textarea id="message" v-model="contact.message" rows="5" placeholder="Message"
+                                            :invalid="submitted && !contact.message" />
                                     </div>
                                     <div class="flex justify-center mt-5">
+                                        <Toast />
                                         <Button label="Send Message" type="submit" />
                                     </div>
                                 </form>
@@ -269,6 +269,11 @@ import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import Footer from '@/components/Footer.vue';
+import emailjs from "@emailjs/browser";
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
+
+const toast = useToast();
 
 const fullText = 'WEB DEVELOPER'
 const displayText = ref('')
@@ -282,10 +287,40 @@ const contact = ref({
     subject: "",
     message: ""
 });
+const success = ref(false);
+const submitted = ref(false);
+const failed = ref(false);
 
 const scrollContainer = ref(null)
 const activeSection = ref('about')
-const sectionIds = ['about', 'portfolio', 'resume', 'contact']
+const sectionIds = ['about', 'portfolio', 'resume', 'contact'];
+const serviceKey = import.meta.env.VITE_SERVICE_KEY;
+const temaplateKey = import.meta.env.VITE_TEMPLATE_KEY;
+const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+
+const sendEmail = async () => {
+    submitted.value = true;
+    if (contact.value.fullname != "" && contact.value.email != "" && contact.value.subject != "" && contact.value.message != "") {
+        try {
+            const result = await emailjs.send(
+                `${serviceKey}`,      // Your Service ID
+                `${temaplateKey}`,     // Your Template ID
+                {
+                    fullname: contact.value.fullname,
+                    email: contact.value.email,
+                    subject: contact.value.subject,
+                    message: contact.value.message
+                },
+                `${publicKey}`       // Your Public Key
+            );
+            toast.add({ severity: 'success', summary: 'Done', detail: 'Message Succcessfully Sent !', life: 3000 });
+            console.log(result.text);
+        } catch (error) {
+            toast.add({ severity: 'error', summary: 'Error', detail: 'Message Sent Failed', life: 3000 });
+            console.error("Error sending email:", error);
+        }
+    }
+}
 
 const scrollToSection = (id) => {
     const el = document.getElementById(id)
