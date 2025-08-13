@@ -383,49 +383,49 @@ const showPDF = () => {
 const skills = ref([
     {
         "name": "Vue",
-        "icon": [{ link: "/src/assets/logo/icons8-vue-js.svg" }],
+        "icon": [{ link: "/logo/icons8-vue-js.svg" }],
         "star": 3,
         "level": "Intermediate"
     },
     {
         "name": "Laravel",
-        "icon": [{ link: "/src/assets/logo/icons8-laravel-64.png" }],
+        "icon": [{ link: "/logo/icons8-laravel-64.png" }],
         "star": 2.5,
         "level": "Novice"
     },
     {
         "name": "Node.Js",
-        "icon": [{ link: "/src/assets/logo/icons8-nodejs.svg" }],
+        "icon": [{ link: "/logo/icons8-nodejs.svg" }],
         "star": 3,
         "level": "Intermediate"
     },
     {
         "name": "MySQL & PostgreSQL",
-        "icon": [{ link: "/src/assets/logo/icons8-mysql-logo.svg" }, { link: "/src/assets/logo/icons8-postgresql.svg" }],
+        "icon": [{ link: "/logo/icons8-mysql-logo.svg" }, { link: "/logo/icons8-postgresql.svg" }],
         "star": 3.5,
         "level": "Intermediate"
     },
     {
         "name": "Spring Boot",
-        "icon": [{ link: "/src/assets/logo/icons8-spring-boot.svg" }],
+        "icon": [{ link: "/logo/icons8-spring-boot.svg" }],
         "star": 3,
         "level": "Intermediate"
     },
     {
         "name": "Bootstrap",
-        "icon": [{ link: "/src/assets/logo/icons8-bootstrap.svg" }],
+        "icon": [{ link: "/logo/icons8-bootstrap.svg" }],
         "star": 3,
         "level": "Intermediate"
     },
     {
         "name": "Tailwind",
-        "icon": [{ link: "/src/assets/logo/icons8-tailwind-css.svg" }],
+        "icon": [{ link: "/logo/icons8-tailwind-css.svg" }],
         "star": 3.5,
         "level": "Intermediate"
     },
     {
         "name": "HTML & CSS",
-        "icon": [{ link: "/src/assets/logo/icons8-html-5.svg" }, { link: "/src/assets/logo/icons8-css-logo.svg" }],
+        "icon": [{ link: "/logo/icons8-html-5.svg" }, { link: "/logo/icons8-css-logo.svg" }],
         "star": 4,
         "level": "Advanced"
     },
@@ -433,25 +433,25 @@ const skills = ref([
 
 const projects = [
     {
-        "image": "/src/assets/image/jaegar.png",
+        "image": "/image/jaegar.png",
         "name": "CasHiLo Web App for Money Management",
         "stacks": ["Vue", "Spring", "PostgreSQL"],
         "description": "A financial management platform that simplifies money management with features like multi-account support, detailed financial record tracking, and an interactive dashboard for real-time insights. Developed with Spring Boot, Vue, Tailwind, and PostgreSQL to deliver performance, scalability, and a modern user experience."
     },
     {
-        "image": "/src/assets/image/jaegar.png",
+        "image": "/image/jaegar.png",
         "name": "Jaegar Resto for Restaurant Management",
         "stacks": ["Laravel", "Bootstrap 5", "PostgreSQL"],
         "description": "A comprehensive restaurant management system that streamlines operations with features like table management, menu organization, real-time menu availability control, and an interactive sales dashboard. Developed with Laravel, Bootstrap, and PostgreSQL for performance, scalability, and ease of use."
     },
     {
-        "image": "/src/assets/image/jaegar.png",
+        "image": "/image/jaegar.png",
         "name": "POS App",
         "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
         "description": "A web-based system that simplifies store operations by providing real-time inventory tracking, seamless transaction management, and automated cash report generation. Developed using Node.js, MySQL, and Bootstrap for efficiency and reliability."
     },
     {
-        "image": "/src/assets/image/jaegar.png",
+        "image": "/image/jaegar.png",
         "name": "UniPhone Marketplace",
         "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
         "description": "A web-based marketplace platform that offers seamless shopping with features like a cart, wishlist, and secure payment system. Developed using Node.js, MySQL, and Bootstrap to ensure performance, scalability, and user-friendly design."
