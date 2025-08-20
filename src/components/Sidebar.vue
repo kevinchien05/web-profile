@@ -22,19 +22,19 @@
 
             <!-- Social Icons -->
             <div class="flex gap-4 mt-4">
-                <button
+                <button @click="externalLink('https://github.com/kevinchien05')"
                     class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-500">
                     <i class="pi pi-github"></i>
                 </button>
-                <button
+                <button @click="externalLink('https://www.instagram.com/kevinchien_/?igsh=MXJvbWZnZ3d5dHZxcw%3D%3D&utm_source=qr#')"
                     class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500">
                     <i class="pi pi-instagram"></i>
                 </button>
-                <button
+                <button @click="externalLink('https://wa.me/6281375250181')"
                     class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-500">
                     <i class="pi pi-whatsapp"></i>
                 </button>
-                <button
+                <button @click="externalLink('https://www.linkedin.com/in/kevin-chien-8b8059294')"
                     class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-600">
                     <i class="pi pi-linkedin"></i>
                 </button>
@@ -76,4 +76,9 @@ function scrollTo(id) {
     el.scrollIntoView({ behavior: "smooth" });
   }
 }
+
+const externalLink = (link) => {
+    window.open(link, '_blank');
+}
+
 </script>

@@ -45,7 +45,7 @@
 
                     <!-- Rotating Image Card -->
                     <div class="relative md:basis-1/3 m-5">
-                        <div class="absolute inset-0 bg-blue-400 dark:bg-indigo-300 rounded-lg animate-rotate-slow z-0">
+                        <div class="absolute inset-0 bg-blue-400 dark:bg-blue-200 rounded-lg animate-rotate-slow z-0">
                         </div>
                         <img src="../assets/image/S__69730311.jpg"
                             class="relative w-full h-full z-10 object-cover rounded-lg" />
@@ -249,6 +249,25 @@
                                         <p><i class="pi pi-phone mr-3"></i>+6281375250181</p>
                                     </div>
                                 </div>
+                                <div class="flex sm:hidden gap-4 mt-4">
+                                    <button @click="externalLink('https://github.com/kevinchien05')"
+                                        class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-500">
+                                        <i class="pi pi-github"></i>
+                                    </button>
+                                    <button
+                                        @click="externalLink('https://www.instagram.com/kevinchien_/?igsh=MXJvbWZnZ3d5dHZxcw%3D%3D&utm_source=qr#')"
+                                        class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500">
+                                        <i class="pi pi-instagram"></i>
+                                    </button>
+                                    <button @click="externalLink('https://wa.me/6281375250181')"
+                                        class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-green-500">
+                                        <i class="pi pi-whatsapp"></i>
+                                    </button>
+                                    <button @click="externalLink('https://www.linkedin.com/in/kevin-chien-8b8059294')"
+                                        class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-600">
+                                        <i class="pi pi-linkedin"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -380,6 +399,10 @@ const showPDF = () => {
     window.open('/resume.pdf', '_blank');
 }
 
+const externalLink = (link) => {
+    window.open(link, '_blank');
+}
+
 const skills = ref([
     {
         "name": "Vue",
@@ -445,13 +468,13 @@ const projects = [
         "description": "A comprehensive restaurant management system that streamlines operations with features like table management, menu organization, real-time menu availability control, and an interactive sales dashboard. Developed with Laravel, Bootstrap, and PostgreSQL for performance, scalability, and ease of use."
     },
     {
-        "image": "/image/jaegar.jpg",
+        "image": "/image/sinarbaru.jpg",
         "name": "POS App",
         "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
         "description": "A web-based system that simplifies store operations by providing real-time inventory tracking, seamless transaction management, and automated cash report generation. Developed using Node.js, MySQL, and Bootstrap for efficiency and reliability."
     },
     {
-        "image": "/image/jaegar.jpg",
+        "image": "/image/uniphone.jpg",
         "name": "UniPhone Marketplace",
         "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
         "description": "A web-based marketplace platform that offers seamless shopping with features like a cart, wishlist, and secure payment system. Developed using Node.js, MySQL, and Bootstrap to ensure performance, scalability, and user-friendly design."
