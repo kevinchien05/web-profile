@@ -167,7 +167,7 @@
                         <div class="flex flex-col sm:flex-row h-auto gap-3">
                             <div
                                 class="md:basis-[50%] lg:basis-[38%] xl:basis-[28%] flex justify-center sm:justify-start">
-                                <img src="../assets/image/bbma.png" class="relative w-auto h-60 company-img" />
+                                <img src="../assets/image/bbma.png" class="relative w-auto sm:w-full h-60 sm:h-auto company-img" />
                             </div>
                             <div class="flex items-center">
                                 <div class="gap-3 px-5 xl:px-0">
