@@ -2,8 +2,16 @@ version: "3"
 services:
   vue-app:
     build: .
+    container_name: web-profile
+    restart: always
     ports:
       - 5174:80
     volumes:
       - .:/usr/src/app
     tty: true
+    networks:
+      - tunnel
+
+networks:
+  tunnel:
+    external: true

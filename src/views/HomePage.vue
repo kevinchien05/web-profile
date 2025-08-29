@@ -47,7 +47,10 @@
                     <div class="relative md:basis-1/3 m-5">
                         <div class="absolute inset-0 bg-blue-400 dark:bg-blue-200 rounded-lg animate-rotate-slow z-0">
                         </div>
-                        <img src="../assets/image/S__69730311.jpg"
+                        <div v-if="loadingPage"
+                            class="absolute inset-0 bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse z-20">
+                        </div>
+                        <img @load="handleLoad" src="../assets/image/S__69730311.jpg"
                             class="relative w-full h-full z-10 object-cover rounded-lg" />
                     </div>
                 </div>
@@ -115,7 +118,10 @@
                     <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-4 px-1">
                         <div class="project-card flex flex-col justify-items-center gap-5 relative opacity-0"
                             v-for="(i, index) in projects" :key="index">
-                            <img :src="i.image" alt=""
+                            <div v-if="loadingImages[index]"
+                                class="absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse z-0">
+                            </div>
+                            <img :src="i.image" @load="handleImageLoad(index)" alt=""
                                 class="w-full h-100 object-fill transition-transform duration-500 ease-in-out hover:scale-[1.05]" />
 
                             <div class="flex flex-row gap-5 mx-2 items-center relative">
@@ -139,6 +145,9 @@
                                     class="absolute left-0 right-0 top-full mt-2 p-4 rounded-lg shadow-lg bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 z-50">
                                     <p class="text-sm text-gray-700 dark:text-gray-200">
                                         {{ i.description }}
+                                    </p>
+                                    <p v-if="i.demo" class="text-sm text-gray-700 dark:text-gray-200">
+                                        Demo App : <a :href="i.demo" target="_blank" class="underline">{{ i.demo }}</a>
                                     </p>
                                 </div>
                             </Transition>
@@ -167,7 +176,8 @@
                         <div class="flex flex-col sm:flex-row h-auto gap-3">
                             <div
                                 class="md:basis-[50%] lg:basis-[38%] xl:basis-[28%] flex justify-center sm:justify-start">
-                                <img src="../assets/image/bbma.png" class="relative w-auto sm:w-full h-60 sm:h-auto company-img" />
+                                <img src="../assets/image/bbma.png"
+                                    class="relative w-auto sm:w-full h-60 sm:h-auto company-img" />
                             </div>
                             <div class="flex items-center">
                                 <div class="gap-3 px-5 xl:px-0">
@@ -230,7 +240,11 @@
                                     </div>
                                     <div class="flex justify-center mt-5">
                                         <Toast />
-                                        <Button label="Send Message" type="submit" />
+                                        <Button label="Send Message" type="submit" :disabled="loading">
+                                            <template v-if="loading">
+                                                <i class="pi pi-spin pi-spinner !text-xl"></i>
+                                            </template>
+                                        </Button>
                                     </div>
                                 </form>
                             </div>
@@ -294,6 +308,7 @@ import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
 
+const loadingPage = ref(true);
 const fullText = 'WEB DEVELOPER'
 const displayText = ref('')
 let isDeleting = false
@@ -316,9 +331,18 @@ const sectionIds = ['about', 'portfolio', 'resume', 'contact'];
 const serviceKey = import.meta.env.VITE_SERVICE_KEY;
 const temaplateKey = import.meta.env.VITE_TEMPLATE_KEY;
 const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+const loading = ref(false);
+
+function handleLoad() {
+    // Add small delay before hiding skeleton
+    setTimeout(() => {
+        loadingPage.value = false;
+    }, 500); // 500ms delay
+}
 
 const sendEmail = async () => {
     submitted.value = true;
+    loading.value = true;
     if (contact.value.fullname != "" && contact.value.email != "" && contact.value.subject != "" && contact.value.message != "") {
         try {
             const result = await emailjs.send(
@@ -334,9 +358,16 @@ const sendEmail = async () => {
             );
             toast.add({ severity: 'success', summary: 'Done', detail: 'Message Succcessfully Sent !', life: 3000 });
             console.log(result.text);
+            contact.value.fullname = "";
+            contact.value.email = "";
+            contact.value.subject = "";
+            contact.value.message = "";
+            submitted.value = false;
         } catch (error) {
             toast.add({ severity: 'error', summary: 'Error', detail: 'Message Sent Failed', life: 3000 });
             console.error("Error sending email:", error);
+        } finally {
+            loading.value = false;
         }
     }
 }
@@ -378,6 +409,7 @@ onMounted(() => {
         // update once in case user loads in middle
         updateActiveSection()
     }
+    loadingImages.value = projects.value.map(() => true);
 })
 
 onBeforeUnmount(() => {
@@ -385,6 +417,12 @@ onBeforeUnmount(() => {
         scrollContainer.value.removeEventListener('scroll', updateActiveSection)
     }
 })
+
+function handleImageLoad(index) {
+    setTimeout(() => { // small delay for smoother transition
+        loadingImages.value[index] = false;
+    }, 400);
+}
 
 const toggleDescription = (index) => {
     activeDescriptionIndex.value = activeDescriptionIndex.value === index ? null : index;
@@ -459,7 +497,8 @@ const projects = [
         "image": "/image/cashilo.jpg",
         "name": "CasHiLo Web App for Money Management",
         "stacks": ["Vue", "Spring", "PostgreSQL"],
-        "description": "A financial management platform that simplifies money management with features like multi-account support, detailed financial record tracking, and an interactive dashboard for real-time insights. Developed with Spring Boot, Vue, Tailwind, and PostgreSQL to deliver performance, scalability, and a modern user experience."
+        "description": "A financial management platform that simplifies money management with features like multi-account support, detailed financial record tracking, and an interactive dashboard for real-time insights. Developed with Spring Boot, Vue, Tailwind, and PostgreSQL to deliver performance, scalability, and a modern user experience.",
+        "demo": "https://cashilo.kevin05.my.id",
     },
     {
         "image": "/image/jaegar.jpg",
@@ -480,6 +519,9 @@ const projects = [
         "description": "A web-based marketplace platform that offers seamless shopping with features like a cart, wishlist, and secure payment system. Developed using Node.js, MySQL, and Bootstrap to ensure performance, scalability, and user-friendly design."
     },
 ];
+
+const loadingImages = ref([]);
+
 
 const getStarClass = (rating, position) => {
     if (rating >= position) {

@@ -4,6 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+# Enable ketika run di linux
+# RUN chmod -R +x node_modules/.bin
 RUN npm run build
 
 # tahap produksi

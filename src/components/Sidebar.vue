@@ -11,7 +11,11 @@
 
             <!-- Avatar + Name -->
             <div class="relative mt-8">
-                <img src="../assets/image/S__69730311.jpg" class="w-24 h-24 rounded-full border-4 border-blue-500" />
+                <div v-if="loadingPage"
+                    class="w-24 h-24 rounded-full bg-gray-300 dark:bg-gray-700 animate-pulse z-0 absolute inset-0">
+                </div>
+                <img @load="handleLoad" src="../assets/image/S__69730311.jpg"
+                    class="w-24 h-24 rounded-full border-4 border-blue-500" />
             </div>
 
             <!-- Name & Title -->
@@ -26,7 +30,8 @@
                     class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-500">
                     <i class="pi pi-github"></i>
                 </button>
-                <button @click="externalLink('https://www.instagram.com/kevinchien_/?igsh=MXJvbWZnZ3d5dHZxcw%3D%3D&utm_source=qr#')"
+                <button
+                    @click="externalLink('https://www.instagram.com/kevinchien_/?igsh=MXJvbWZnZ3d5dHZxcw%3D%3D&utm_source=qr#')"
                     class="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500">
                     <i class="pi pi-instagram"></i>
                 </button>
@@ -60,21 +65,30 @@
 </template>
 <script setup>
 import SidebarItem from '@/components/SidebarItem.vue';
-import { useDark } from '@vueuse/core'
+import { useDark } from '@vueuse/core';
+import { ref } from 'vue';
+const loadingPage = ref(true);
 const isDark = useDark();
 const toggleDark = () => {
     document.documentElement.classList.toggle('dark');
     isDark.value = !isDark.value;
 }
 const props = defineProps({
-  activeSection: String
+    activeSection: String
 });
 
+function handleLoad() {
+    // Add small delay before hiding skeleton
+    setTimeout(() => {
+        loadingPage.value = false;
+    }, 500); // 500ms delay
+}
+
 function scrollTo(id) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  }
+    const el = document.getElementById(id);
+    if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+    }
 }
 
 const externalLink = (link) => {
