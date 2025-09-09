@@ -451,7 +451,7 @@ const skills = ref([
     {
         "name": "Laravel",
         "icon": [{ link: "/logo/icons8-laravel-64.png" }],
-        "star": 2.5,
+        "star": 2,
         "level": "Novice"
     },
     {
@@ -463,7 +463,7 @@ const skills = ref([
     {
         "name": "MySQL & PostgreSQL",
         "icon": [{ link: "/logo/icons8-mysql-logo.svg" }, { link: "/logo/icons8-postgresql.svg" }],
-        "star": 3.5,
+        "star": 3,
         "level": "Intermediate"
     },
     {
@@ -489,6 +489,12 @@ const skills = ref([
         "icon": [{ link: "/logo/icons8-html-5.svg" }, { link: "/logo/icons8-css-logo.svg" }],
         "star": 4,
         "level": "Advanced"
+    },
+    {
+        "name": "Docker",
+        "icon": [{ link: "/logo/icons8-docker.svg" }],
+        "star": 1.5,
+        "level": "Beginner"
     },
 ]);
 
