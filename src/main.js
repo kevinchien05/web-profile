@@ -6,6 +6,7 @@ import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import App from './App.vue'
 import ToastService from 'primevue/toastservice';
+import VSnow from "vsnow";
 
 const MyPreset = definePreset(Aura, {
     semantic: {
@@ -39,5 +40,6 @@ app.use(PrimeVue, {
     }
 });
 app.use(ToastService);
+app.use(VSnow);
 app.mount('#app');
 

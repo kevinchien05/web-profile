@@ -122,7 +122,7 @@
                                 class="absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse z-0">
                             </div>
                             <img :src="i.image" @load="handleImageLoad(index)" alt=""
-                                class="w-full h-100 object-fill transition-transform duration-500 ease-in-out hover:scale-[1.05]" />
+                                class="w-full h-60 md:h-75 xl:h-70 object-fill transition-transform duration-500 ease-in-out hover:scale-[1.05]" />
 
                             <div class="flex flex-row gap-5 mx-2 items-center relative">
                                 <div class="basis-5/6 flex flex-col gap-3">
@@ -500,29 +500,18 @@ const skills = ref([
 
 const projects = [
     {
-        "image": "/image/cashilo.jpg",
+        "image": "/image/cashilo.png",
         "name": "CasHiLo Web App for Money Management",
         "stacks": ["Vue", "Spring", "PostgreSQL"],
         "description": "A financial management platform that simplifies money management with features like multi-account support, detailed financial record tracking, and an interactive dashboard for real-time insights. Developed with Spring Boot, Vue, Tailwind, and PostgreSQL to deliver performance, scalability, and a modern user experience.",
         "demo": "https://cashilo.kevin05.my.id",
     },
     {
-        "image": "/image/jaegar.jpg",
-        "name": "Jaegar Resto for Restaurant Management",
-        "stacks": ["Laravel", "Bootstrap 5", "PostgreSQL"],
-        "description": "A comprehensive restaurant management system that streamlines operations with features like table management, menu organization, real-time menu availability control, and an interactive sales dashboard. Developed with Laravel, Bootstrap, and PostgreSQL for performance, scalability, and ease of use."
-    },
-    {
-        "image": "/image/sinarbaru.jpg",
-        "name": "POS App",
-        "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
-        "description": "A web-based system that simplifies store operations by providing real-time inventory tracking, seamless transaction management, and automated cash report generation. Developed using Node.js, MySQL, and Bootstrap for efficiency and reliability."
-    },
-    {
-        "image": "/image/uniphone.jpg",
-        "name": "UniPhone Marketplace",
-        "stacks": ["Node Js", "Bootstrap 5", "MySQL"],
-        "description": "A web-based marketplace platform that offers seamless shopping with features like a cart, wishlist, and secure payment system. Developed using Node.js, MySQL, and Bootstrap to ensure performance, scalability, and user-friendly design."
+        "image": "/image/taskhub.png",
+        "name": "Taskhub Web App for Project Management",
+        "stacks": ["Vue", "Spring", "PostgreSQL"],
+        "description": "A web-based project management application that helps users organize and track projects efficiently. It allows users to create projects, manage tasks with different statuses, assign team members, and set priorities and deadlines. The application also includes a project calendar to visualize schedules and due dates. TaskHub is built using Vue.js, Spring Boot, and PostgreSQL to deliver a modern, responsive, and reliable project management solution.",
+        "demo": "https://taskhub.kevin05.my.id",
     },
 ];
 
