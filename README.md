@@ -1,35 +1,59 @@
-# web-profile
 
-This template should help get you started developing with Vue 3 in Vite.
+# WEB-PROFILE - Personal Portofolio
+A responsive website for personal portofolio built with VueJs and Tailwind CSS 
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Demo
 
-## Customize configuration
+Demo link :
+- [link](https://kevin05.my.id)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+
+- [Git](https://git-scm.com/) must be installed on your operating system.
+- [Node](https://nodejs.org/en) must be installed on your operating system.
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file get from [EmailJS](https://www.emailjs.com/)
+
+`VITE_SERVICE_KEY`
+
+`VITE_TEMPLATE_KEY`
+
+`VITE_PUBLIC_KEY`
+
+
+## Installation
+
+### Clone my-project
 
 ```sh
-npm install
+git clone https://github.com/kevinchien05/web-profile.git
 ```
-
-### Compile and Hot-Reload for Development
+## Run Locally Without Docker
+### Install my-project with npm
 
 ```sh
-npm run dev
+  cd web-profile
+  npm install
 ```
 
-### Compile and Minify for Production
-
+### Run Locally
 ```sh
-npm run build
+    npm run dev
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
+### Compile For Production
 ```sh
-npm run lint
+    npm run build
 ```
+
+## Run Using Docker
+```sh
+    cd web-profile
+    docker compose up -d
+```
+    
